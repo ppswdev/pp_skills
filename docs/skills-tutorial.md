@@ -10,7 +10,7 @@ Skills 是 Trae 中的功能模块，用于实现特定的任务自动化。每�
 
 1. **创建目录结构**
    - 在项目根目录下创建 `.trae/skills/<skill-name>/` 目录
-   - 例如：`.trae/skills/i18n-translator/`
+   - 例如：`.trae/skills/pp-translator/`
 
 2. **创建 SKILL.md 文件**
    - 在技能目录中创建 `SKILL.md` 文件
@@ -28,16 +28,16 @@ Skills 是 Trae 中的功能模块，用于实现特定的任务自动化。每�
    - 包括功能描述、使用场景、如何使用、工作原理等
    - 提供示例和注意事项
 
-### 1.3 示例：创建 i18n-translator Skill
+### 1.3 示例：创建 pp-translator Skill
 
 ```bash
 # 创建目录
-mkdir -p .trae/skills/i18n-translator
+mkdir -p .trae/skills/pp-translator
 
 # 创建 SKILL.md 文件
-cat > .trae/skills/i18n-translator/SKILL.md << 'EOF'
+cat > .trae/skills/pp-translator/SKILL.md << 'EOF'
 ---
-name: "i18n-translator"
+name: "pp-translator"
 description: "自动以简体中文为基准翻译国际化文本文件，支持增量翻译，处理l10n目录下的语言文件。当用户需要同步翻译其他语言文件时调用。"
 ---
 
@@ -117,7 +117,7 @@ EOF
 
 1. **组合使用**
    - 可以将多个 Skills 组合使用，实现复杂任务
-   - 例如：先使用 i18n-translator 翻译文本，再使用其他 Skills 进行处理
+   - 例如：先使用 pp-translator 翻译文本，再使用其他 Skills 进行处理
 
 2. **自定义参数**
    - 根据 Skills 的说明，传递自定义参数

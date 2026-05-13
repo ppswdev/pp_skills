@@ -52,8 +52,8 @@ mkdir -p ~/.trae-cn/skills
 # 将项目中的技能复制到全局目录
 cp -r /path/to/your/project/.trae/skills/your-skill-name ~/.trae-cn/skills/
 
-# 示例：复制 i18n-translator 技能
-cp -r /Users/xiaopin/Desktop/AppDev/pp_skills/.trae/skills/i18n-translator ~/.trae-cn/skills/
+# 示例：复制 pp-translator 技能
+cp -r /Users/xiaopin/Desktop/AppDev/Projects/pp_skills/.trae/skills/pp-translator ~/.trae-cn/skills/
 ```
 
 #### 2.2.3 复制所有技能
@@ -93,7 +93,7 @@ cp -r .trae/skills/* ~/.trae-cn/skills/
 
 ### 4.1 适合作为全局技能的
 
-- 通用工具（如 i18n-translator、代码格式化）
+- 通用工具（如 pp-translator、代码格式化）
 - 跨项目的标准化流程
 - 个人常用的开发辅助工具
 - 代码生成模板
@@ -109,17 +109,17 @@ cp -r .trae/skills/* ~/.trae-cn/skills/
 
 ## 5. 实际操作示例
 
-### 5.1 配置 i18n-translator 为全局技能
+### 5.1 配置 pp-translator 为全局技能
 
 ```bash
 # 1. 创建全局技能目录
 mkdir -p ~/.trae-cn/skills
 
-# 2. 复制 i18n-translator 技能到全局目录
-cp -r /Users/xiaopin/Desktop/AppDev/pp_skills/.trae/skills/i18n-translator ~/.trae-cn/skills/
+# 2. 复制 pp-translator 技能到全局目录
+cp -r /Users/xiaopin/Desktop/AppDev/Projects/pp_skills/.trae/skills/pp-translator ~/.trae-cn/skills/
 
 # 3. 验证技能文件
-ls -la ~/.trae-cn/skills/i18n-translator/
+ls -la ~/.trae-cn/skills/pp-translator/
 
 # 4. 重启 Trae IDE
 ```

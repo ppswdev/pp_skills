@@ -1,13 +1,20 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-LOCAL_SKILLS_DIR="$PROJECT_ROOT/.trae/skills"
-GLOBAL_SKILLS_DIR="$HOME/.trae-cn/skills"
+LOCAL_SKILLS_DIR="$PROJECT_ROOT/skills"
+
+TARGETS=(
+  "$HOME/.claude/skills"
+  "$HOME/.codex/skills"
+  "$HOME/.copilot/skills"
+  "$HOME/.trae/skills"
+  "$HOME/.trae-cn/skills"
+)
 
 echo "======================================"
-echo "Trae 中国版全局技能安装脚本"
+echo "多工具全局技能安装脚本"
 echo "======================================"
 echo ""
 
@@ -21,20 +28,37 @@ if [ ! "$(ls -A $LOCAL_SKILLS_DIR)" ]; then
     exit 0
 fi
 
-mkdir -p "$GLOBAL_SKILLS_DIR"
+collect_leaf_skills() {
+    find "$LOCAL_SKILLS_DIR" -type f -name "SKILL.md" | while read -r skill_file; do
+        dirname "$skill_file"
+    done | sort
+}
 
-echo "正在从本地目录复制技能到全局目录..."
+install_to_target() {
+    local target_dir="$1"
+    local skill_dir
+    local skill_name
+
+    mkdir -p "$target_dir"
+    find "$target_dir" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+
+    echo "目标目录: $target_dir"
+    while read -r skill_dir; do
+        [ -z "$skill_dir" ] && continue
+        skill_name=$(basename "$skill_dir")
+        echo "  正在安装技能: $skill_name"
+        cp -R "$skill_dir" "$target_dir/$skill_name"
+        echo "    ✓ 已安装"
+    done < <(collect_leaf_skills)
+    echo ""
+}
+
+echo "正在从统一源目录复制技能到全局目录..."
 echo "源目录: $LOCAL_SKILLS_DIR"
-echo "目标目录: $GLOBAL_SKILLS_DIR"
 echo ""
 
-for skill_dir in "$LOCAL_SKILLS_DIR"/*; do
-    if [ -d "$skill_dir" ]; then
-        skill_name=$(basename "$skill_dir")
-        echo "正在安装技能: $skill_name"
-        cp -rf "$skill_dir" "$GLOBAL_SKILLS_DIR/"
-        echo "  ✓ 已安装"
-    fi
+for target_dir in "${TARGETS[@]}"; do
+    install_to_target "$target_dir"
 done
 
 echo ""
@@ -42,7 +66,9 @@ echo "======================================"
 echo "安装完成！"
 echo "======================================"
 echo ""
-echo "已安装的技能:"
-ls -1 "$GLOBAL_SKILLS_DIR"
+echo "已同步到以下全局目录:"
+for target_dir in "${TARGETS[@]}"; do
+    echo "- $target_dir"
+done
 echo ""
-echo "请重启 Trae IDE 以使全局技能生效。"
+echo "请重启对应工具，以使全局技能生效。"
