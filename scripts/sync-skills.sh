@@ -8,8 +8,7 @@ SOURCE_DIR="$PROJECT_ROOT/skills"
 TARGETS=(
   "$PROJECT_ROOT/.claude/skills"
   "$PROJECT_ROOT/.codex/skills"
-  "$PROJECT_ROOT/.github/skills"
-  "$PROJECT_ROOT/.trae/skills"
+  "$PROJECT_ROOT/.trae-cn/skills"
 )
 
 if [ ! -d "$SOURCE_DIR" ]; then

@@ -8,8 +8,6 @@ LOCAL_SKILLS_DIR="$PROJECT_ROOT/skills"
 TARGETS=(
   "$HOME/.claude/skills"
   "$HOME/.codex/skills"
-  "$HOME/.copilot/skills"
-  "$HOME/.trae/skills"
   "$HOME/.trae-cn/skills"
 )
 

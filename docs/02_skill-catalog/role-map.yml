@@ -1,0 +1,78 @@
+# Skill 到使用角色的映射表。
+# 新增 skill 后必须补充本文件，否则角色索引和用法说明会缺少适用对象。
+
+claude-api:
+  domain: 00_base
+  roles: [程序开发者, 技能创建者]
+doc-coauthoring:
+  domain: 00_base
+  roles: [技能创建者, 产品经理, 程序开发者, 运营增长]
+docx:
+  domain: 00_base
+  roles: [独立开发者, 产品经理, 运营增长]
+internal-comms:
+  domain: 00_base
+  roles: [运营增长, 产品经理, 独立开发者]
+mcp-builder:
+  domain: 00_base
+  roles: [程序开发者, 技能创建者]
+pdf:
+  domain: 00_base
+  roles: [独立开发者, 程序开发者, 运营增长]
+pptx:
+  domain: 00_base
+  roles: [独立开发者, 产品经理, 运营增长]
+skill-creator:
+  domain: 00_base
+  roles: [技能创建者, 程序开发者]
+slack-gif-creator:
+  domain: 00_base
+  roles: [运营增长, 独立开发者]
+web-artifacts-builder:
+  domain: 00_base
+  roles: [程序开发者, 产品设计, 技能创建者]
+xlsx:
+  domain: 00_base
+  roles: [独立开发者, 运营增长, 产品经理]
+algorithmic-art:
+  domain: 05_design
+  roles: [产品设计, 独立开发者]
+brand-guidelines:
+  domain: 05_design
+  roles: [产品设计, 运营增长]
+canvas-design:
+  domain: 05_design
+  roles: [产品设计, 独立开发者]
+theme-factory:
+  domain: 05_design
+  roles: [产品设计, 运营增长]
+ui-ux-pro-max:
+  domain: 05_design
+  roles: [产品设计, 程序开发者, 独立开发者]
+composition-patterns:
+  domain: 06_engineering
+  roles: [程序开发者]
+deploy-to-vercel:
+  domain: 06_engineering
+  roles: [程序开发者, 独立开发者]
+frontend-design:
+  domain: 06_engineering
+  roles: [程序开发者, 产品设计]
+react-best-practices:
+  domain: 06_engineering
+  roles: [程序开发者]
+react-native-skills:
+  domain: 06_engineering
+  roles: [程序开发者]
+react-view-transitions:
+  domain: 06_engineering
+  roles: [程序开发者, 产品设计]
+web-design-guidelines:
+  domain: 06_engineering
+  roles: [程序开发者, 产品设计]
+webapp-testing:
+  domain: 06_engineering
+  roles: [程序开发者]
+pp-translator:
+  domain: 14_localization
+  roles: [本地化, 程序开发者, 独立开发者, 运营增长]
