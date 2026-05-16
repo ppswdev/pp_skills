@@ -35,8 +35,15 @@
 
 ## 04 Role Guides
 
-适合按角色快速了解推荐技能组合。
+适合按角色快速了解推荐技能组合。`使用指南` 面向“安装后我该怎么用”，`清单` 面向长期规划和补齐更多技能。
 
+- [独立开发者使用指南](04_role-guides/独立开发者使用指南.md)
+- [产品经理使用指南](04_role-guides/产品经理使用指南.md)
+- [产品设计使用指南](04_role-guides/产品设计使用指南.md)
+- [程序开发者使用指南](04_role-guides/程序开发者使用指南.md)
+- [运营增长使用指南](04_role-guides/运营增长使用指南.md)
+- [本地化使用指南](04_role-guides/本地化使用指南.md)
+- [技能创建者使用指南](04_role-guides/技能创建者使用指南.md)
 - [全球独立开发者必装 Skills 全栈清单](04_role-guides/全球独立开发者必装Skills全栈清单.md)
 - [产品需求挖掘 Skills 清单](04_role-guides/产品需求挖掘Skills清单.md)
 - [产品设计 Skills 清单](04_role-guides/产品设计Skills清单.md)

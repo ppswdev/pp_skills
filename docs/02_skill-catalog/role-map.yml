@@ -4,12 +4,24 @@
 claude-api:
   domain: 00_base
   roles: [程序开发者, 技能创建者]
+brainstorming:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 产品经理, 产品设计, 技能创建者]
+dispatching-parallel-agents:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
 doc-coauthoring:
   domain: 00_base
   roles: [技能创建者, 产品经理, 程序开发者, 运营增长]
 docx:
   domain: 00_base
   roles: [独立开发者, 产品经理, 运营增长]
+executing-plans:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
+finishing-a-development-branch:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
 internal-comms:
   domain: 00_base
   roles: [运营增长, 产品经理, 独立开发者]
@@ -22,15 +34,45 @@ pdf:
 pptx:
   domain: 00_base
   roles: [独立开发者, 产品经理, 运营增长]
+receiving-code-review:
+  domain: 00_base
+  roles: [程序开发者, 技能创建者]
+requesting-code-review:
+  domain: 00_base
+  roles: [程序开发者, 技能创建者]
 skill-creator:
   domain: 00_base
   roles: [技能创建者, 程序开发者]
 slack-gif-creator:
   domain: 00_base
   roles: [运营增长, 独立开发者]
+subagent-driven-development:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
+systematic-debugging:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
+test-driven-development:
+  domain: 00_base
+  roles: [程序开发者, 技能创建者]
+using-git-worktrees:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
+using-superpowers:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
+verification-before-completion:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
 web-artifacts-builder:
   domain: 00_base
   roles: [程序开发者, 产品设计, 技能创建者]
+writing-plans:
+  domain: 00_base
+  roles: [程序开发者, 独立开发者, 技能创建者]
+writing-skills:
+  domain: 00_base
+  roles: [技能创建者, 程序开发者]
 xlsx:
   domain: 00_base
   roles: [独立开发者, 运营增长, 产品经理]

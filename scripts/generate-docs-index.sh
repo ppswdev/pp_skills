@@ -7,9 +7,10 @@ SKILLS_DIR="$PROJECT_ROOT/skills"
 DOCS_DIR="$PROJECT_ROOT/docs"
 CATALOG_DIR="$DOCS_DIR/02_skill-catalog"
 USAGE_DIR="$DOCS_DIR/03_skill-usage"
+ROLE_GUIDES_DIR="$DOCS_DIR/04_role-guides"
 ROLE_MAP="$CATALOG_DIR/role-map.yml"
 
-mkdir -p "$CATALOG_DIR" "$USAGE_DIR"
+mkdir -p "$CATALOG_DIR" "$USAGE_DIR" "$ROLE_GUIDES_DIR"
 
 if [ ! -d "$SKILLS_DIR" ]; then
   echo "错误：skills 源目录不存在: $SKILLS_DIR"
@@ -149,6 +150,20 @@ usage_prompts() {
     doc-coauthoring) printf '%s\n' '- “和我一起写一份技术方案。”' '- “帮我起草 PRD，并边写边追问缺失信息。”' '- “把这些上下文整理成 RFC。”' ;;
     internal-comms) printf '%s\n' '- “写一份项目进展更新。”' '- “生成一份领导层周报。”' '- “把事故复盘整理成内部 FAQ。”' ;;
     slack-gif-creator) printf '%s\n' '- “做一个适合 Slack 表情的 GIF。”' '- “生成一个 128x128 的循环动画。”' '- “检查这个 GIF 是否适合 Slack 使用。”' ;;
+    brainstorming) printf '%s\n' '- “先和我一起梳理这个功能想法，暂时不要写代码。”' '- “帮我把这个产品点子拆成清晰需求和设计方案。”' '- “我想做一个新工具，先问我问题再给方案。”' ;;
+    dispatching-parallel-agents) printf '%s\n' '- “这些失败看起来相互独立，请并行分派 agent 调查。”' '- “把这几个模块的问题拆给多个 agent 同时分析。”' '- “并行检查测试、文档和实现是否都有问题。”' ;;
+    executing-plans) printf '%s\n' '- “按照这份计划执行，并在完成后汇报结果。”' '- “读取这个 implementation plan，然后逐项落地。”' '- “根据计划完成修改、测试和文档更新。”' ;;
+    finishing-a-development-branch) printf '%s\n' '- “实现完成了，帮我检查并准备收尾。”' '- “测试都过了，指导我下一步是合并、PR 还是清理分支。”' '- “帮我整理当前开发分支的完成状态和集成选项。”' ;;
+    receiving-code-review) printf '%s\n' '- “这条 code review 意见合理吗？先帮我分析。”' '- “评审说这里要改，先确认风险和正确做法。”' '- “帮我逐条理解这些 review comments，再决定怎么处理。”' ;;
+    requesting-code-review) printf '%s\n' '- “这个功能做完了，请帮我做一次 code review。”' '- “合并前检查这次改动是否满足需求。”' '- “请从规格符合度和代码质量两方面 review。”' ;;
+    subagent-driven-development) printf '%s\n' '- “这是一份实施计划，请用 subagent 驱动的方式执行。”' '- “把计划里的独立任务分派出去，并在每项后做 review。”' '- “按这份 plan 并行推进实现、验证和质量检查。”' ;;
+    systematic-debugging) printf '%s\n' '- “这个测试失败了，先找根因，不要直接猜修复。”' '- “帮我系统排查这个线上 bug。”' '- “这个行为异常，先建立假设并验证根因。”' ;;
+    test-driven-development) printf '%s\n' '- “这个 bug 先写一个失败测试，再修复。”' '- “实现这个功能时按 TDD 流程来。”' '- “先设计能证明问题存在的测试用例。”' ;;
+    using-git-worktrees) printf '%s\n' '- “开始这个功能前，帮我准备隔离工作区。”' '- “这个改动比较大，先用 worktree 隔离。”' '- “检查当前是否在独立工作区，不是的话创建一个。”' ;;
+    using-superpowers) printf '%s\n' '- “开始前先检查哪些 superpowers skill 适用。”' '- “按 superpowers 的规则选择并使用技能。”' '- “先加载合适的工作流技能，再处理这个任务。”' ;;
+    verification-before-completion) printf '%s\n' '- “在说完成前，请跑验证并给我证据。”' '- “确认这次修复真的通过测试，不要只看代码。”' '- “完成前检查 diff、测试和生成文件是否一致。”' ;;
+    writing-plans) printf '%s\n' '- “根据这个需求写一份可执行实施计划。”' '- “先不要改代码，帮我把任务拆成详细 plan。”' '- “生成一个新工程师也能执行的 implementation plan。”' ;;
+    writing-skills) printf '%s\n' '- “帮我用 superpowers 的方法写一个新 skill。”' '- “验证这个 skill 是否真的改变 agent 行为。”' '- “把这个重复流程沉淀成可测试的 SKILL.md。”' ;;
     *) printf '%s\n' "- “请用 ${skill} 帮我处理这个任务。”" "- “检查这个任务是否适合 ${skill}。”" "- “按 ${skill} 的流程给我一个结果。”" ;;
   esac
 }
@@ -166,6 +181,20 @@ when_text() {
     pptx) echo "当输入或输出涉及 PPT / .pptx / slides / deck 时使用，包括创建演示文稿、读取内容、修改页面、套模板和处理 speaker notes。" ;;
     skill-creator) echo "当你要创建新 skill、修改已有 skill、优化触发描述、设计测试提示词或评估 skill 效果时使用。" ;;
     slack-gif-creator) echo "当你要制作适合 Slack 使用的动画 GIF 时使用，尤其是 Slack emoji、短循环动画和需要控制尺寸/帧率/文件大小的场景。" ;;
+    brainstorming) echo "当你要做任何创造性或产品/功能设计工作之前使用，适合先澄清意图、需求、约束和设计方向，再进入实现。" ;;
+    dispatching-parallel-agents) echo "当任务里有两个以上相互独立的问题、测试失败、模块检查或调研方向时使用，适合并行分派 agent 节省时间。" ;;
+    executing-plans) echo "当你已有一份明确 implementation plan，并希望在当前会话中逐项执行、验证和汇报时使用。" ;;
+    finishing-a-development-branch) echo "当功能实现完成且验证通过后使用，适合决定下一步是合并、开 PR、清理分支还是保留工作区。" ;;
+    receiving-code-review) echo "当你收到 code review 反馈后使用，适合先理解、验证和判断意见是否正确，再决定是否修改。" ;;
+    requesting-code-review) echo "当完成一个任务、较大功能或准备合并前使用，适合请独立视角检查规格符合度、代码质量和遗漏风险。" ;;
+    subagent-driven-development) echo "当你已有实施计划且任务可以拆成相对独立的工作项时使用，适合用多个 subagent 执行并在每项后做双阶段 review。" ;;
+    systematic-debugging) echo "当遇到 bug、测试失败或异常行为时使用，适合先找根因、建立假设、验证证据，再做修复。" ;;
+    test-driven-development) echo "当你要实现新功能或修 bug 时使用，适合先写失败测试，再写最小实现，并通过重构完成闭环。" ;;
+    using-git-worktrees) echo "当开始较大功能、风险改动或执行实施计划前使用，适合确认或创建隔离工作区，避免污染当前工作树。" ;;
+    using-superpowers) echo "当开始一个任务并需要按 Superpowers 方法选择合适技能时使用，适合建立“先选技能、再行动”的工作流纪律。" ;;
+    verification-before-completion) echo "当准备声明任务完成、修复成功或测试通过前使用，适合用新鲜验证证据支撑结论。" ;;
+    writing-plans) echo "当你有规格、需求或复杂任务但还不该直接改代码时使用，适合生成可执行、可交接、可验证的实施计划。" ;;
+    writing-skills) echo "当你要创建、修改或验证 skill 时使用，适合用类似 TDD 的方式验证 skill 是否真正改变 agent 行为。" ;;
     web-artifacts-builder) echo "当你要创建复杂的 claude.ai HTML artifact 时使用，适合需要 React、Tailwind、shadcn/ui、状态管理或打包成单文件的交互式作品。" ;;
     xlsx) echo "当输入或输出主要是 Excel、CSV、TSV 等表格文件时使用，包括清洗数据、创建表格、添加公式、格式化、生成图表和转换格式。" ;;
     algorithmic-art) echo "当你要用代码创作生成艺术时使用，例如 p5.js、随机种子、粒子系统、流场、噪声场或交互式算法视觉。" ;;
@@ -219,6 +248,203 @@ not_for_text() {
     pp-translator) echo "不适合普通文案润色或非国际化文件的翻译任务。" ;;
     *) echo "不适合与该 skill 触发描述无关、目标不明确或缺少必要输入的任务。" ;;
   esac
+}
+
+role_file_name() {
+  case "$1" in
+    独立开发者) echo "独立开发者使用指南.md" ;;
+    产品经理) echo "产品经理使用指南.md" ;;
+    产品设计) echo "产品设计使用指南.md" ;;
+    程序开发者) echo "程序开发者使用指南.md" ;;
+    运营增长) echo "运营增长使用指南.md" ;;
+    本地化) echo "本地化使用指南.md" ;;
+    技能创建者) echo "技能创建者使用指南.md" ;;
+    *) echo "$1使用指南.md" ;;
+  esac
+}
+
+role_intro() {
+  case "$1" in
+    独立开发者) echo "适合一个人或小团队从想法、设计、开发、上线、运营到本地化的完整闭环。重点不是一次用完所有技能，而是按当前阶段调用最能推进结果的技能。" ;;
+    产品经理) echo "适合把需求、方案、沟通材料和数据表整理清楚。当前仓库里的产品经理技能更偏文档协作、汇报材料和结构化办公，需求挖掘类专属 skill 可后续补齐。" ;;
+    产品设计) echo "适合做 UI/UX 方案、视觉方向、主题风格、设计检查和前端设计协作。可以从设计构思一路用到实现质量评审。" ;;
+    程序开发者) echo "适合开发、重构、测试、部署、AI/API 集成和工程质量检查。建议把技能串成“实现 -> 检查 -> 测试 -> 部署 -> 文档”的工作流。" ;;
+    运营增长) echo "适合做运营文档、内部沟通、表格分析、物料制作、品牌主题和本地化内容支持。偏增长运营的专属 skill 可后续补齐。" ;;
+    本地化) echo "适合维护多语言文件、本地化翻译和国际化策略。当前核心技能是 pp-translator，配合参考文档可处理不同国家地区表达习惯。" ;;
+    技能创建者) echo "适合创建、优化、评估和维护 skill。重点是把重复工作沉淀成可触发、可验证、可复用的 SKILL.md。" ;;
+    *) echo "本指南根据 role-map.yml 自动生成，帮助该角色快速理解可以使用哪些技能以及如何组合调用。" ;;
+  esac
+}
+
+role_workflow() {
+  case "$1" in
+    独立开发者)
+      printf '%s\n' \
+        "1. **想法澄清**：用 \`brainstorming\` 先问清问题，再用 \`writing-plans\` 写成可执行计划。" \
+        "2. **材料整理**：用 \`doc-coauthoring\` 写产品想法、方案或说明。" \
+        "3. **界面和体验设计**：用 \`ui-ux-pro-max\`、\`canvas-design\` 或 \`algorithmic-art\` 生成视觉方向。" \
+        "4. **开发执行**：用 \`executing-plans\` 或 \`subagent-driven-development\` 执行计划，遇到问题用 \`systematic-debugging\`。" \
+        "5. **验证和部署**：用 \`verification-before-completion\` 收尾验证，再用 \`deploy-to-vercel\` 上线预览。" \
+        "6. **运营和本地化**：用 \`pptx\`、\`docx\`、\`xlsx\`、\`pdf\` 处理交付物，用 \`pp-translator\` 同步多语言文件。"
+      ;;
+    产品经理)
+      printf '%s\n' \
+        "1. **澄清需求**：用 \`brainstorming\` 把模糊想法问清楚，再确认范围和约束。" \
+        "2. **梳理方案**：用 \`doc-coauthoring\` 共同起草 PRD、RFC、方案说明。" \
+        "3. **拆执行计划**：用 \`writing-plans\` 把需求拆成工程可执行任务。" \
+        "4. **整理汇报材料**：用 \`pptx\` 生成或修改演示文稿，用 \`xlsx\` 清理需求表、优先级表或反馈列表。" \
+        "5. **输出正式文档和沟通**：用 \`docx\` 生成评审文档，用 \`internal-comms\` 生成项目更新、FAQ 或进展说明。"
+      ;;
+    产品设计)
+      printf '%s\n' \
+        "1. **定方向**：用 \`brainstorming\` 澄清目标用户、场景和约束，再用 \`ui-ux-pro-max\` 规划页面结构、风格、组件和交互。" \
+        "2. **定视觉语言**：用 \`theme-factory\`、\`brand-guidelines\` 统一颜色、字体和品牌感。" \
+        "3. **做视觉资产**：用 \`canvas-design\` 或 \`algorithmic-art\` 生成海报、视觉图或生成艺术。" \
+        "4. **协作实现**：用 \`frontend-design\` 辅助前端落地高质量界面。" \
+        "5. **上线前检查**：用 \`web-design-guidelines\` 和 \`verification-before-completion\` 做 UX、可访问性和设计 QA。"
+      ;;
+    程序开发者)
+      printf '%s\n' \
+        "1. **计划和隔离**：用 \`writing-plans\` 写实施计划，必要时用 \`using-git-worktrees\` 准备隔离工作区。" \
+        "2. **实现和调试**：用 \`test-driven-development\`、\`systematic-debugging\`、\`executing-plans\` 或 \`subagent-driven-development\` 推进开发。" \
+        "3. **构建 AI/API 能力**：用 \`claude-api\`、\`mcp-builder\` 处理 Claude API 和 MCP 服务。" \
+        "4. **实现前端和移动端**：用 \`frontend-design\`、\`react-best-practices\`、\`react-native-skills\`、\`composition-patterns\`、\`react-view-transitions\`。" \
+        "5. **评审和验证**：用 \`requesting-code-review\`、\`receiving-code-review\`、\`webapp-testing\`、\`verification-before-completion\` 做质量闭环。" \
+        "6. **部署和国际化**：用 \`deploy-to-vercel\` 发布预览环境，用 \`pp-translator\` 同步语言文件。"
+      ;;
+    运营增长)
+      printf '%s\n' \
+        "1. **写运营材料**：用 \`doc-coauthoring\`、\`internal-comms\` 写公告、周报、FAQ、项目更新。" \
+        "2. **处理数据和表格**：用 \`xlsx\` 清理运营数据、内容计划和活动排期。" \
+        "3. **制作汇报和文档**：用 \`pptx\`、\`docx\`、\`pdf\` 处理运营交付物。" \
+        "4. **统一视觉表达**：用 \`brand-guidelines\`、\`theme-factory\` 统一活动和品牌素材风格。" \
+        "5. **多语言运营**：用 \`pp-translator\` 处理多语言文案和语言文件。"
+      ;;
+    本地化)
+      printf '%s\n' \
+        "1. **确定基准语言**：先明确使用中文还是英文作为翻译基准。" \
+        "2. **增量同步语言文件**：用 \`pp-translator\` 只翻译新增或选中的 key。" \
+        "3. **检查目标地区表达**：参考 \`国际化各个国家地区策略指南\` 调整语气和用词。" \
+        "4. **回写项目文件**：确认 ARB、strings、JSON、YAML 等文件格式保持正确。"
+      ;;
+    技能创建者)
+      printf '%s\n' \
+        "1. **创建新技能**：用 \`skill-creator\` 或 \`writing-skills\` 梳理触发场景、流程和 SKILL.md。" \
+        "2. **验证技能行为**：用 \`test-driven-development\` 和 \`verification-before-completion\` 把示例提示、失败基线和通过证据补齐。" \
+        "3. **构建工具能力**：用 \`mcp-builder\` 把外部服务沉淀成 MCP 工具。" \
+        "4. **优化 API 型技能**：用 \`claude-api\` 处理 Claude SDK、模型迁移和 prompt caching。" \
+        "5. **补文档**：用 \`doc-coauthoring\` 写使用说明、评估标准和维护流程。"
+      ;;
+    *)
+      printf '%s\n' "1. 从下方推荐技能中选择最贴近当前任务的一个。" "2. 打开对应用法页，复制示例说法并补充你的实际输入。" "3. 若任务跨阶段，按用法页逐个串联技能。"
+      ;;
+  esac
+}
+
+role_example_prompts() {
+  case "$1" in
+    独立开发者)
+      printf '%s\n' \
+        "- “先用 brainstorming 和 writing-plans，把这个 SaaS 想法整理成 MVP 开发计划。”" \
+        "- “帮我设计一个适合海外用户的 landing page，并给出组件结构。”" \
+        "- “实现完成前，用 verification-before-completion 检查测试和文档是否都同步了。”"
+      ;;
+    产品经理)
+      printf '%s\n' \
+        "- “先用 brainstorming 追问我，把这段需求背景整理清楚。”" \
+        "- “把这些用户反馈整理成优先级表格。”" \
+        "- “用 writing-plans 把这个 PRD 拆成工程可执行任务。”"
+      ;;
+    产品设计)
+      printf '%s\n' \
+        "- “帮我设计一个 B2B SaaS 后台首页的信息架构和视觉方向。”" \
+        "- “检查这个页面的 UX、可访问性和设计一致性。”" \
+        "- “给这套页面生成一个统一主题和字体配色方案。”"
+      ;;
+    程序开发者)
+      printf '%s\n' \
+        "- “这个 bug 先用 systematic-debugging 找根因，再按 TDD 修复。”" \
+        "- “这份计划请用 subagent-driven-development 执行，并在每项后 review。”" \
+        "- “完成前用 verification-before-completion 跑验证并给出证据。”"
+      ;;
+    运营增长)
+      printf '%s\n' \
+        "- “写一份新功能发布公告和用户 FAQ。”" \
+        "- “把这份运营数据整理成 Excel 并生成图表。”" \
+        "- “把活动文案翻译成日文、韩文和英文。”"
+      ;;
+    本地化)
+      printf '%s\n' \
+        "- “只翻译我选中的这几个 key 到其他语言。”" \
+        "- “按英文为基准补齐这些 arb 文件缺失的语言。”" \
+        "- “检查日文和韩文翻译是否符合当地 App 表达习惯。”"
+      ;;
+    技能创建者)
+      printf '%s\n' \
+        "- “用 writing-skills 帮我创建一个用于 PRD 评审的 skill。”" \
+        "- “优化这个 SKILL.md 的 description，让触发更准确。”" \
+        "- “给这个 skill 设计 5 条真实测试提示词，并说明如何验证。”"
+      ;;
+    *) printf '%s\n' "- “我现在是$1，帮我选择适合当前任务的技能。”" ;;
+  esac
+}
+
+write_role_usage_guide() {
+  local role="$1"
+  local role_file="$ROLE_GUIDES_DIR/$(role_file_name "$role")"
+  local before_file after_file tmp_file
+  before_file="$(mktemp)"
+  after_file="$(mktemp)"
+  tmp_file="$(mktemp)"
+
+  if [ -f "$role_file" ] && grep -q '<!-- AUTO-GENERATED:START -->' "$role_file"; then
+    awk '/<!-- AUTO-GENERATED:START -->/ { exit } { print }' "$role_file" > "$before_file"
+    awk 'seen { print } /<!-- AUTO-GENERATED:END -->/ { seen = 1; next }' "$role_file" > "$after_file"
+  else
+    {
+      echo "# $role 使用指南"
+      echo ""
+    } > "$before_file"
+    {
+      echo ""
+      echo "## 人工补充"
+      echo ""
+      echo "<!-- 可在这里补充该角色的团队内部流程、真实案例或项目约定。生成脚本不会覆盖本区块。 -->"
+    } > "$after_file"
+  fi
+
+  cat "$before_file" > "$tmp_file"
+  {
+    echo "<!-- AUTO-GENERATED:START -->"
+    echo ""
+    echo "## 适用说明"
+    echo ""
+    echo "$(role_intro "$role")"
+    echo ""
+    echo "## 推荐使用流程"
+    echo ""
+    role_workflow "$role"
+    echo ""
+    echo "## 推荐技能"
+    echo ""
+    echo "| Skill | 分类 | 怎么用 |"
+    echo "| --- | --- | --- |"
+    awk -F'|' -v role="$role" 'index($3, role) { print "| [" $2 "](../03_skill-usage/" $2 ".md) | `" $1 "` | [查看用法](../03_skill-usage/" $2 ".md) |" }' "$role_tmp"
+    echo ""
+    echo "## 你可以直接这样说"
+    echo ""
+    role_example_prompts "$role"
+    echo ""
+    echo "## 相关索引"
+    echo ""
+    echo "- [按使用角色](../02_skill-catalog/按使用角色.md)"
+    echo "- [技能具体用法说明](../03_skill-usage/README.md)"
+    echo ""
+    echo "<!-- AUTO-GENERATED:END -->"
+  } >> "$tmp_file"
+  cat "$after_file" >> "$tmp_file"
+  mv "$tmp_file" "$role_file"
+  rm -f "$before_file" "$after_file"
 }
 
 write_usage_page() {
@@ -384,6 +610,7 @@ while read -r role; do
   echo "| --- | --- | --- |" >> "$role_file"
   awk -F'|' -v role="$role" 'index($3, role) { print "| [" $2 "](../03_skill-usage/" $2 ".md) | `" $1 "` | [查看](../03_skill-usage/" $2 ".md) |" }' "$role_tmp" >> "$role_file"
   echo "" >> "$role_file"
+  write_role_usage_guide "$role"
 done < <(awk -F'|' '{ n = split($3, roles, "、"); for (i = 1; i <= n; i++) print roles[i] }' "$role_tmp" | sort -u)
 
 {
