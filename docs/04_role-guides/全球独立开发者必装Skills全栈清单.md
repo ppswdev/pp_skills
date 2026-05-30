@@ -38,7 +38,7 @@
 | `operations/` | 发布、活动、运营 SOP、版本说明、复盘 | `product-operations-planner`、`release-notes-generator` |
 | `support/` | 客服、知识库、工单洞察、口碑维护 | `support-insight-miner` |
 | `finance-legal/` | 报价、发票、合同、条款、基础合规辅助 | `invoice-contract-assistant` |
-| `localization/` | 翻译、本地化、区域市场适配 | `pp-translator`、`market-localization-playbook` |
+| `localization/` | 翻译、本地化、区域市场适配 | `pp-tran`、`market-localization-playbook` |
 
 这套分类比“产品 / 设计 / 开发 / 运营”更完整，因为它覆盖了独立开发者最容易忽略、但最直接决定收入的几段：
 
@@ -100,7 +100,7 @@
 | 浏览器验证 | `browser-use` / `verification` | 平台型能力 | 自动走通关键路径，验证登录、支付、表单、转化流程 | 适合带 Browser 插件或浏览器自动化的平台 | P1 |
 | PDF / 文档处理 | `pdf` / `documents` | 平台型能力 | 生成方案、导出报价单、阅读 PDF、批注文档 | 适合支持文档技能的平台 | P2 |
 | 表格 / 数据分析 | `spreadsheets` | 平台型能力 | 分析收入、渠道 ROI、关键词数据、内容投放结果 | 适合支持表格技能的平台 | P1 |
-| 国际化翻译 | `pp-translator` | 现成可装 | 多语言文案翻译、增量翻译、国际化支持 | 本仓库已有 `pp-translator` | P0 |
+| 国际化翻译 | `pp-tran` | 现成可装 | 多语言文案翻译、增量翻译、国际化支持 | 本仓库已有 `pp-tran` | P0 |
 | 地区化策略 | `market-localization-playbook` | 建议自建 | 针对美国、欧洲、日本、中东等市场输出本地化策略 | 把你的市场经验写进 Skill | P1 |
 | 内容营销 | `content-engine` | 建议自建 | 把产品卖点批量改写为博客、X、LinkedIn、Reddit、邮件内容 | 封装你的内容模板与语气规范 | P0 |
 | SEO 落地页生产 | `landing-page-writer` | 建议自建 | 为每个关键词或场景生成高转化落地页结构 | 结合产品卖点、FAQ、社证模板自建 | P0 |
@@ -123,7 +123,7 @@
 | 1 | `anthropics/skills` | 这是你后续自建所有业务 Skill 的基础母库 |
 | 2 | `vercel-labs/agent-skills` | 先把开发质量、UI 检查、前端工程能力补齐 |
 | 3 | `ui-ux-pro-max-skill` | 解决独立开发最容易短板的“设计不专业”问题 |
-| 4 | `pp-translator` | 直接解决出海产品多语言问题 |
+| 4 | `pp-tran` | 直接解决出海产品多语言问题 |
 | 5 | 自建 `request-analyzer` | 没有需求发现能力，后面都是低效开发 |
 | 6 | 自建 `content-engine` | 没有内容分发能力，产品容易做完没人来 |
 | 7 | 自建 `pricing-experiment-planner` | 没有变现实验，增长很难转成收入 |
@@ -142,7 +142,7 @@
 - `competitor-scan`
 - `ui-ux-pro-max-skill`
 - `react-best-practices`
-- `pp-translator`
+- `pp-tran`
 
 核心目标：
 
@@ -205,14 +205,14 @@ uipro init --ai trae
 
 项目内已经包含：
 
-- `.trae/skills/pp-translator`
+- `.trae-cn/skills/pp-tran`
 - `.trae/skills/skill-creator`
 
 如果你想把它们安装为 Trae 中国版全局技能，可参考：
 
 ```bash
 mkdir -p ~/.trae-cn/skills
-cp -r .trae/skills/pp-translator ~/.trae-cn/skills/
+cp -r .trae-cn/skills/pp-tran ~/.trae-cn/skills/
 cp -r .trae/skills/skill-creator ~/.trae-cn/skills/
 ```
 
@@ -240,7 +240,7 @@ cp -r .trae/skills/skill-creator ~/.trae-cn/skills/
 建议按下面路径搭建你的 Skill 体系：
 
 1. 先安装公开仓库：`anthropics/skills`、`vercel-labs/agent-skills`、`ui-ux-pro-max-skill`
-2. 直接复用本仓库的 `pp-translator` 和 `skill-creator`
+2. 直接复用本仓库的 `pp-tran` 和 `skill-creator`
 3. 用 `skill-creator` 先做 3 个自有 Skills：`request-analyzer`、`content-engine`、`analytics-copilot`
 4. 等有稳定用户后，再补 `pricing-experiment-planner` 和 `support-insight-miner`
 

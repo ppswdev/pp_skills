@@ -207,7 +207,7 @@ My-Skills-Library/
 
 ## 七、最终建议
 
-1. **先从基础技能开始**：skill-creator、pp-translator
+1. **先从基础技能开始**：skill-creator、pp-tran
 2. **逐步添加专业技能**：根据项目需求选择
 3. **定期更新**：保持技能版本最新
 4. **分享和贡献**：参与社区建设

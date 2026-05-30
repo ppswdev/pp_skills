@@ -1,15 +1,15 @@
-# pp-translator 用法说明
+# pp-tran 用法说明
 
 <!-- AUTO-GENERATED:START -->
 
 ## 技能名称
 
-- 文件夹名：`pp-translator`
-- Frontmatter name：`pp-translator`
+- 文件夹名：`pp-tran`
+- Frontmatter name：`pp-tran`
 
 ## 所属分类
 
-- `14_localization`（本地化）
+- `99_ppskills`（PP 专属技能）
 
 ## 适合谁用
 
@@ -17,11 +17,11 @@
 
 ## 什么时候用
 
-当你要做 App / Web 项目的国际化翻译时使用，适合按中文或英文基准增量翻译 ARB、strings、JSON、YAML 等语言文件。
+当你要做 App / Web 项目的国际化翻译时使用。pp-tran 是 pp-translator 的简称，适合按中文或英文基准增量翻译 ARB、strings、JSON、YAML 等语言文件。
 
 ## 你可以怎么说
 
-- “同步翻译多语言，按简体中文为基准。”
+- “用 pp-tran 同步翻译多语言，按简体中文为基准。”
 - “只翻译我刚加的这几个 key 到日文和韩文。”
 - “检查这些 arb 文件，把缺失语言补齐。”
 
@@ -39,7 +39,7 @@
 
 ## 源文件
 
-- `skills/14_localization/pp-translator/SKILL.md`
+- `skills/99_ppskills/pp-tran/SKILL.md`
 
 <!-- AUTO-GENERATED:END -->
 

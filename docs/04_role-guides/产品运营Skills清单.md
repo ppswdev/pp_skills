@@ -47,7 +47,7 @@
 | `skills/product/` | 反馈转需求、版本优先级、运营视角需求 | `feedback-to-roadmap` |
 | `skills/support/` | 客服洞察、用户问题归因、知识库运营 | `support-insight-miner` |
 | `skills/monetization/` | 付费转化、套餐包装、续费、促销 | `pricing-conversion-ops` |
-| `skills/localization/` | 多语言运营、本地化活动、地区文案 | `market-localization-ops`、`pp-translator` |
+| `skills/99_ppskills/` | 多语言运营、本地化活动、地区文案 | `market-localization-ops`、`pp-tran` |
 
 ---
 
@@ -84,7 +84,7 @@ P1 适合产品已经有一定用户量，开始需要系统化增长、分层�
 | `ab-test-planner` | `skills/data/` | 设计运营实验和判断样本、指标、周期 | 标题、付费墙、邮件、落地页、引导流程实验 |
 | `churn-risk-miner` | `skills/support/` | 分析流失风险和退款原因 | 低活跃、取消订阅、退款、差评 |
 | `support-knowledge-ops` | `skills/support/` | 把高频问题转成知识库和客服话术 | FAQ、帮助中心、客服自动回复 |
-| `local-market-ops` | `skills/localization/` | 为不同地区设计本地化运营打法 | 美国、日本、欧洲、中东、东南亚市场运营 |
+| `local-market-ops` | `skills/99_ppskills/` | 为不同地区设计本地化运营打法 | 美国、日本、欧洲、中东、东南亚市场运营 |
 | `product-led-sales-ops` | `skills/sales/` | 把产品使用信号转成销售或转化动作 | B2B 试用、线索评分、销售跟进材料 |
 
 ---

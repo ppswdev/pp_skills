@@ -43,7 +43,7 @@ pp_skills/
 所有通用 Skill 都优先维护在领域目录中，例如：
 
 ```text
-skills/14_localization/pp-translator/SKILL.md
+skills/99_ppskills/pp-tran/SKILL.md
 skills/00_base/skill-creator/SKILL.md
 ```
 
@@ -133,5 +133,5 @@ skills/10_monetization/checkout-copy-optimizer/
 skills/11_operations/product-operations-planner/
 skills/12_support/support-insight-miner/
 skills/13_finance-legal/invoice-contract-assistant/
-skills/14_localization/pp-translator/
+skills/99_ppskills/pp-tran/
 ```

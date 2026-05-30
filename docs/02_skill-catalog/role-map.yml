@@ -115,6 +115,6 @@ web-design-guidelines:
 webapp-testing:
   domain: 06_engineering
   roles: [程序开发者]
-pp-translator:
-  domain: 14_localization
+pp-tran:
+  domain: 99_ppskills
   roles: [本地化, 程序开发者, 独立开发者, 运营增长]

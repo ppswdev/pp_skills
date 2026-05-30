@@ -39,7 +39,7 @@
 | `engineering/review/` | PR 审查、代码质量、安全扫描 | `code-reviewer`、`security-reviewer` |
 | `engineering/devops/` | CI/CD、容器、部署、监控、回滚 | `github-actions-builder`、`dockerfile-reviewer` |
 | `engineering/docs/` | README、API 文档、ADR、变更日志 | `technical-doc-writer`、`release-notes-generator` |
-| `engineering/localization/` | i18n 文案、语言包、增量翻译 | `pp-translator` |
+| `engineering/localization/` | i18n 文案、语言包、增量翻译 | `pp-tran` |
 | `engineering/skill-building/` | 自建团队专属开发 Skills | `skill-creator` |
 
 ---
@@ -77,7 +77,7 @@
 | 云平台部署 | `vercel-cli` / `wrangler` | 平台型能力 | 管理 Vercel、Cloudflare Workers、环境变量和发布流程 | P1 |
 | 文档生成 | `technical-doc-writer` | 建议自建 | 生成 README、接口文档、架构说明、ADR 和排障手册 | P1 |
 | 版本说明 | `release-notes-generator` | 建议自建 | 从 Git、issue、PR 中生成面向开发者和用户的更新说明 | P2 |
-| 国际化开发 | `pp-translator` | 现成可装 | 根据中文或英文基准语言增量同步其他语言包 | P1 |
+| 国际化开发 | `pp-tran` | 现成可装 | 根据中文或英文基准语言增量同步其他语言包 | P1 |
 | Skill 自建 | `skill-creator` | 现成可装 | 把团队固定流程沉淀成可复用 Skill | P0 |
 
 ---
@@ -94,7 +94,7 @@
 - `figma-implement-design`
 - `browser-use` / `verification`
 - `test-case-generator`
-- `pp-translator`
+- `pp-tran`
 
 重点覆盖：
 
@@ -296,7 +296,7 @@ description: 什么时候触发这个 Skill，它解决什么开发问题，适�
 
 | Skill | 路径 | 适合程序开发者的用途 |
 | --- | --- | --- |
-| `pp-translator` | `skills/14_localization/pp-translator/` | 多语言应用的 i18n 文案增量翻译 |
+| `pp-tran` | `skills/99_ppskills/pp-tran/` | 多语言应用的 i18n 文案增量翻译 |
 | `skill-creator` | `skills/00_base/skill-creator/` | 创建和优化团队专属开发 Skills |
 
 修改 `skills/` 后，按仓库规则运行：

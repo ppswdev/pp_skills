@@ -118,6 +118,7 @@ domain_label() {
     12_support) echo "用户支持" ;;
     13_finance-legal) echo "财务法务" ;;
     14_localization) echo "本地化" ;;
+    99_ppskills) echo "PP 专属技能" ;;
     *) echo "$1" ;;
   esac
 }
@@ -125,7 +126,7 @@ domain_label() {
 usage_prompts() {
   local skill="$1"
   case "$skill" in
-    pp-translator) printf '%s\n' '- “同步翻译多语言，按简体中文为基准。”' '- “只翻译我刚加的这几个 key 到日文和韩文。”' '- “检查这些 arb 文件，把缺失语言补齐。”' ;;
+    pp-tran) printf '%s\n' '- “用 pp-tran 同步翻译多语言，按简体中文为基准。”' '- “只翻译我刚加的这几个 key 到日文和韩文。”' '- “检查这些 arb 文件，把缺失语言补齐。”' ;;
     skill-creator) printf '%s\n' '- “帮我创建一个用于代码评审的 skill。”' '- “优化这个 SKILL.md 的触发描述。”' '- “给这个 skill 设计几个测试用例。”' ;;
     ui-ux-pro-max) printf '%s\n' '- “帮我设计一个 SaaS dashboard 页面。”' '- “检查这个页面的 UI/UX 问题并给修改建议。”' '- “把这个移动端界面优化得更专业。”' ;;
     deploy-to-vercel) printf '%s\n' '- “把这个项目部署到 Vercel 预览环境。”' '- “部署并给我一个可访问链接。”' '- “检查 Vercel 部署失败的原因。”' ;;
@@ -210,7 +211,7 @@ when_text() {
     react-view-transitions) echo "当你要用 View Transition API 实现页面切换、共享元素、列表重排、组件进出场或 Next.js 路由动画时使用。" ;;
     web-design-guidelines) echo "当你要审查 Web UI 是否符合设计、交互、可访问性和界面最佳实践时使用，适合 UI review、UX audit 和设计 QA。" ;;
     webapp-testing) echo "当你要用 Playwright 测试本地 Web 应用时使用，适合验证前端流程、截图、调试交互、查看浏览器日志和复现 UI bug。" ;;
-    pp-translator) echo "当你要做 App / Web 项目的国际化翻译时使用，适合按中文或英文基准增量翻译 ARB、strings、JSON、YAML 等语言文件。" ;;
+    pp-tran) echo "当你要做 App / Web 项目的国际化翻译时使用。pp-tran 是 pp-translator 的简称，适合按中文或英文基准增量翻译 ARB、strings、JSON、YAML 等语言文件。" ;;
     *) echo "$fallback" ;;
   esac
 }
@@ -220,7 +221,7 @@ prep_text() {
     docx|pdf|pptx|xlsx) echo "准备好对应文件路径、期望修改内容、输出格式和任何模板或样式要求。" ;;
     deploy-to-vercel) echo "准备好项目目录、登录状态、部署目标，以及是否需要预览或生产环境。" ;;
     webapp-testing) echo "准备好本地启动方式、目标 URL、要验证的用户流程和预期结果。" ;;
-    pp-translator) echo "准备好基准语言文件、目标语言范围，以及需要全量还是增量翻译。" ;;
+    pp-tran) echo "准备好基准语言文件、目标语言范围，以及需要全量还是增量翻译。" ;;
     *) echo "准备好任务目标、输入材料、约束条件和你希望得到的输出形式。" ;;
   esac
 }
@@ -231,7 +232,7 @@ output_text() {
     pdf) echo "处理后的 PDF、提取结果或 PDF 分析说明。" ;;
     pptx) echo "生成或修改后的演示文稿，以及关键页面说明。" ;;
     xlsx) echo "处理后的电子表格、图表、公式或清洗后的数据文件。" ;;
-    pp-translator) echo "更新后的多语言文件、翻译差异和必要的本地化说明。" ;;
+    pp-tran) echo "更新后的多语言文件、翻译差异和必要的本地化说明。" ;;
     webapp-testing) echo "测试结论、复现步骤、截图或控制台/网络问题摘要。" ;;
     *) echo "符合该 skill 工作流的文档、代码、设计、检查报告或操作建议。" ;;
   esac
@@ -245,7 +246,7 @@ not_for_text() {
     pptx) echo "不适合非演示文稿类交付物。" ;;
     xlsx) echo "不适合最终交付不是表格文件的任务。" ;;
     deploy-to-vercel) echo "不适合不需要部署或目标平台不是 Vercel 的任务。" ;;
-    pp-translator) echo "不适合普通文案润色或非国际化文件的翻译任务。" ;;
+    pp-tran) echo "不适合普通文案润色或非国际化文件的翻译任务。" ;;
     *) echo "不适合与该 skill 触发描述无关、目标不明确或缺少必要输入的任务。" ;;
   esac
 }
@@ -270,7 +271,7 @@ role_intro() {
     产品设计) echo "适合做 UI/UX 方案、视觉方向、主题风格、设计检查和前端设计协作。可以从设计构思一路用到实现质量评审。" ;;
     程序开发者) echo "适合开发、重构、测试、部署、AI/API 集成和工程质量检查。建议把技能串成“实现 -> 检查 -> 测试 -> 部署 -> 文档”的工作流。" ;;
     运营增长) echo "适合做运营文档、内部沟通、表格分析、物料制作、品牌主题和本地化内容支持。偏增长运营的专属 skill 可后续补齐。" ;;
-    本地化) echo "适合维护多语言文件、本地化翻译和国际化策略。当前核心技能是 pp-translator，配合参考文档可处理不同国家地区表达习惯。" ;;
+    本地化) echo "适合维护多语言文件、本地化翻译和国际化策略。当前核心技能是 pp-tran；pp-tran 是 pp-translator 的简称，配合参考文档可处理不同国家地区表达习惯。" ;;
     技能创建者) echo "适合创建、优化、评估和维护 skill。重点是把重复工作沉淀成可触发、可验证、可复用的 SKILL.md。" ;;
     *) echo "本指南根据 role-map.yml 自动生成，帮助该角色快速理解可以使用哪些技能以及如何组合调用。" ;;
   esac
@@ -285,7 +286,7 @@ role_workflow() {
         "3. **界面和体验设计**：用 \`ui-ux-pro-max\`、\`canvas-design\` 或 \`algorithmic-art\` 生成视觉方向。" \
         "4. **开发执行**：用 \`executing-plans\` 或 \`subagent-driven-development\` 执行计划，遇到问题用 \`systematic-debugging\`。" \
         "5. **验证和部署**：用 \`verification-before-completion\` 收尾验证，再用 \`deploy-to-vercel\` 上线预览。" \
-        "6. **运营和本地化**：用 \`pptx\`、\`docx\`、\`xlsx\`、\`pdf\` 处理交付物，用 \`pp-translator\` 同步多语言文件。"
+        "6. **运营和本地化**：用 \`pptx\`、\`docx\`、\`xlsx\`、\`pdf\` 处理交付物，用 \`pp-tran\` 同步多语言文件。"
       ;;
     产品经理)
       printf '%s\n' \
@@ -310,7 +311,7 @@ role_workflow() {
         "3. **构建 AI/API 能力**：用 \`claude-api\`、\`mcp-builder\` 处理 Claude API 和 MCP 服务。" \
         "4. **实现前端和移动端**：用 \`frontend-design\`、\`react-best-practices\`、\`react-native-skills\`、\`composition-patterns\`、\`react-view-transitions\`。" \
         "5. **评审和验证**：用 \`requesting-code-review\`、\`receiving-code-review\`、\`webapp-testing\`、\`verification-before-completion\` 做质量闭环。" \
-        "6. **部署和国际化**：用 \`deploy-to-vercel\` 发布预览环境，用 \`pp-translator\` 同步语言文件。"
+        "6. **部署和国际化**：用 \`deploy-to-vercel\` 发布预览环境，用 \`pp-tran\` 同步语言文件。"
       ;;
     运营增长)
       printf '%s\n' \
@@ -318,12 +319,12 @@ role_workflow() {
         "2. **处理数据和表格**：用 \`xlsx\` 清理运营数据、内容计划和活动排期。" \
         "3. **制作汇报和文档**：用 \`pptx\`、\`docx\`、\`pdf\` 处理运营交付物。" \
         "4. **统一视觉表达**：用 \`brand-guidelines\`、\`theme-factory\` 统一活动和品牌素材风格。" \
-        "5. **多语言运营**：用 \`pp-translator\` 处理多语言文案和语言文件。"
+        "5. **多语言运营**：用 \`pp-tran\` 处理多语言文案和语言文件。"
       ;;
     本地化)
       printf '%s\n' \
         "1. **确定基准语言**：先明确使用中文还是英文作为翻译基准。" \
-        "2. **增量同步语言文件**：用 \`pp-translator\` 只翻译新增或选中的 key。" \
+        "2. **增量同步语言文件**：用 \`pp-tran\` 只翻译新增或选中的 key。" \
         "3. **检查目标地区表达**：参考 \`国际化各个国家地区策略指南\` 调整语气和用词。" \
         "4. **回写项目文件**：确认 ARB、strings、JSON、YAML 等文件格式保持正确。"
       ;;

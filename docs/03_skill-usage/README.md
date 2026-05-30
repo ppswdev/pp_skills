@@ -13,6 +13,7 @@
 | [docx](docx.md) | `00_base` | 独立开发者、产品经理、运营增长 | [查看](docx.md) |
 | [executing-plans](executing-plans.md) | `00_base` | 程序开发者、独立开发者、技能创建者 | [查看](executing-plans.md) |
 | [finishing-a-development-branch](finishing-a-development-branch.md) | `00_base` | 程序开发者、独立开发者、技能创建者 | [查看](finishing-a-development-branch.md) |
+| [humanizer-zh](humanizer-zh.md) | `00_base` | 未配置 | [查看](humanizer-zh.md) |
 | [internal-comms](internal-comms.md) | `00_base` | 运营增长、产品经理、独立开发者 | [查看](internal-comms.md) |
 | [mcp-builder](mcp-builder.md) | `00_base` | 程序开发者、技能创建者 | [查看](mcp-builder.md) |
 | [pdf](pdf.md) | `00_base` | 独立开发者、程序开发者、运营增长 | [查看](pdf.md) |
@@ -44,5 +45,6 @@
 | [react-view-transitions](react-view-transitions.md) | `06_engineering` | 程序开发者、产品设计 | [查看](react-view-transitions.md) |
 | [web-design-guidelines](web-design-guidelines.md) | `06_engineering` | 程序开发者、产品设计 | [查看](web-design-guidelines.md) |
 | [webapp-testing](webapp-testing.md) | `06_engineering` | 程序开发者 | [查看](webapp-testing.md) |
-| [pp-translator](pp-translator.md) | `14_localization` | 本地化、程序开发者、独立开发者、运营增长 | [查看](pp-translator.md) |
+| [pp-avp](pp-avp.md) | `99_ppskills` | 未配置 | [查看](pp-avp.md) |
+| [pp-tran](pp-tran.md) | `99_ppskills` | 本地化、程序开发者、独立开发者、运营增长 | [查看](pp-tran.md) |
 <!-- AUTO-GENERATED:END -->
