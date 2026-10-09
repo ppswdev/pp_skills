@@ -9,7 +9,7 @@
 - [Skills 快速开始指南](00_getting-started/Skills快速开始指南.md)
 - [Skills 获取渠道与安装方式大全](00_getting-started/Skills获取渠道与安装方式大全.md)
 - [Skills 使用教程](00_getting-started/skills-tutorial.md)
-- [Trae 中国版 Skills 全局配置指南](00_getting-started/skills-use-traecn.md)
+- [Trae 中国版 Skills 项目级配置指南](00_getting-started/skills-use-traecn.md)
 
 ## 01 Repository
 

@@ -1,214 +1,122 @@
-# Trae 中国版 Skills 全局配置指南
+# Trae 中国版 Skills 项目级配置指南
 
-## 1. 全局技能 vs 项目技能
+## 1. 推荐策略
 
-Trae 中国版 Skills 支持两种技能配置方式：
+本仓库推荐使用“项目级按角色启用”：
 
-### 1.1 全局技能（Global Skills）
+- 全局目录只保留 `skill-creator`
+- 具体业务技能放在项目级 `.trae-cn/skills/`
+- 每个项目根据角色同步所需 skills，避免无关技能误触发
 
-- **适用范围**：所有项目
-- **用途**：个人工具或想在任何地方使用的通用工具
+## 2. 全局技能 vs 项目技能
+
+### 2.1 全局技能
+
 - **配置位置**：`~/.trae-cn/skills/<skill-folder>/`
-- **特点**：一次配置，到处使用
+- **推荐内容**：只放 `skill-creator`
+- **原因**：全局技能会影响所有项目，放太多会扩大触发面
 
-### 1.2 项目技能（Project Skills）
+### 2.2 项目技能
 
-- **适用范围**：仅当前项目
-- **用途**：项目特定的工作流程、团队规范
-- **配置位置**：`<workspace-root>/.trae/skills/<skill-folder>/`
-- **特点**：项目专属，便于团队协作
+- **配置位置**：`<workspace-root>/.trae-cn/skills/<skill-folder>/`
+- **推荐内容**：当前项目角色真正需要的 skills
+- **原因**：项目上下文更清楚，误触发更少，团队协作也更稳定
 
-## 2. 配置全局技能
+## 3. 安装全局基础技能
 
-### 2.1 使用安装脚本（推荐）
-
-项目提供了便捷的安装脚本，可以一键将当前项目下的所有技能复制到全局目录：
+运行：
 
 ```bash
-# 运行安装脚本
-./scripts/install-global-skills.sh
+scripts/install-global-skills.sh
 ```
 
-脚本功能：
+脚本只会安装 `skill-creator` 到：
 
-- 自动检测项目根目录
-- 自动创建全局技能目录
-- 复制 `.trae/skills/` 下的所有技能到 `~/.trae-cn/skills/`
-- 支持覆盖更新，确保使用最新版本
-- 显示安装进度和结果
+```text
+~/.claude/skills/
+~/.codex/skills/
+~/.trae-cn/skills/
+```
 
-### 2.2 手动配置
+不再把全部 skills 安装到全局目录。
 
-#### 2.2.1 创建全局技能目录
+## 4. 按角色同步项目技能
+
+### 程序开发者项目
 
 ```bash
-# 创建全局技能目录（如果不存在）
-mkdir -p ~/.trae-cn/skills
+scripts/sync-skills.sh --role 程序开发者
 ```
 
-#### 2.2.2 复制技能到全局目录
+### 本地化项目
 
 ```bash
-# 将项目中的技能复制到全局目录
-cp -r /path/to/your/project/.trae-cn/skills/your-skill-name ~/.trae-cn/skills/
-
-# 示例：复制 pp-tran 技能
-cp -r /Users/xiaopin/Desktop/AppDev/Projects/pp_skills/.trae-cn/skills/pp-tran ~/.trae-cn/skills/
+scripts/sync-skills.sh --role 本地化
 ```
 
-#### 2.2.3 复制所有技能
+### 同时需要开发和本地化
 
 ```bash
-# 复制当前项目下所有技能到全局目录
-cp -r .trae-cn/skills/* ~/.trae-cn/skills/
+scripts/sync-skills.sh --role 程序开发者 --role 本地化
 ```
 
-### 2.3 重启 Trae IDE
+同步后会生成：
 
-复制完成后，重启 Trae IDE 让全局技能生效。
+```text
+.claude/skills/
+.codex/skills/
+.trae-cn/skills/
+```
 
-## 3. 全局技能的优势
+这些目录都是扁平项目入口，不保留 `00_base/`、`06_engineering/` 这类分类目录。
 
-### 3.1 一次配置，到处使用
-
-- 配置一次后，所有项目都可以使用
-- 无需在每个项目中重复复制
-
-### 3.2 便于维护
-
-- 更新技能时只需修改一个地方
-- 所有项目自动使用最新版本
-
-### 3.3 个人工具库
-
-- 可以将常用的通用工具放在全局技能中
-- 建立个人专属的 AI 工具箱
-
-### 3.4 灵活管理
-
-- 可以随时启用或禁用全局技能
-- 支持在 IDE 设置中管理全局技能
-
-## 4. 技能分类建议
-
-### 4.1 适合作为全局技能的
-
-- 通用工具（如 pp-tran、代码格式化）
-- 跨项目的标准化流程
-- 个人常用的开发辅助工具
-- 代码生成模板
-- 自动化脚本
-
-### 4.2 适合作为项目技能的
-
-- 项目特定的部署流程
-- 团队代码规范检查
-- 项目特定的测试惯例
-- 团队特定的文档生成
-- 项目相关的自动化任务
-
-## 5. 实际操作示例
-
-### 5.1 配置 pp-tran 为全局技能
+## 5. 验证同步结果
 
 ```bash
-# 1. 创建全局技能目录
-mkdir -p ~/.trae-cn/skills
-
-# 2. 复制 pp-tran 技能到全局目录
-cp -r /Users/xiaopin/Desktop/AppDev/Projects/pp_skills/.trae-cn/skills/pp-tran ~/.trae-cn/skills/
-
-# 3. 验证技能文件
-ls -la ~/.trae-cn/skills/pp-tran/
-
-# 4. 重启 Trae IDE
+scripts/validate-skills.sh --role 程序开发者
+scripts/validate-skills.sh --role 本地化
+scripts/validate-skills.sh --role 程序开发者 --role 本地化
 ```
 
-### 5.2 在任何项目中使用
-
-配置完成后，在任何项目中都可以直接使用：
-
-```
-"按照简体中文进行生成"
-```
-
-无需再复制技能文件到项目中。
-
-## 6. 管理全局技能
-
-### 6.1 查看已安装的全局技能
+如果只是检查当前项目镜像和源目录的基本一致性，也可以运行：
 
 ```bash
-# 列出所有全局技能
-ls -la ~/.trae-cn/skills/
+scripts/validate-skills.sh
 ```
 
-### 6.2 删除全局技能
+## 6. 全量同步仅用于维护
 
 ```bash
-# 删除指定的全局技能
-rm -rf ~/.trae-cn/skills/your-skill-name
+scripts/sync-skills.sh --all
+scripts/validate-skills.sh --all
 ```
 
-### 6.3 更新全局技能
+`--all` 会把全部 skills 放进项目入口，容易让模型在无关任务里选择错误技能。日常项目不推荐使用。
 
-```bash
-# 重新复制技能到全局目录（覆盖）
-cp -r /path/to/updated/skill ~/.trae-cn/skills/
+## 7. 常见问题
+
+### 技能没有出现在项目中
+
+检查 `docs/02_skill-catalog/role-map.yml` 是否给该 skill 配置了当前角色。
+
+### 技能触发太频繁
+
+优先减少项目级同步的角色数量。不要把所有 skills 装到全局目录。
+
+### TraeCN 没有识别技能
+
+确认目录结构为：
+
+```text
+.trae-cn/skills/<skill-name>/SKILL.md
 ```
 
-## 7. 最佳实践
+然后重启 TraeCN。
 
-### 7.1 版本控制
+## 8. 最佳实践
 
-- 将全局技能放在 Git 仓库中管理
-- 使用 Git submodule 或符号链接管理
-- 便于在不同机器间同步
-
-### 7.2 文档维护
-
-- 为每个全局技能编写清晰的文档
-- 说明技能的用途、参数和注意事项
-- 提供使用示例
-
-### 7.3 定期清理
-
-- 定期检查不再使用的全局技能
-- 删除过时的技能，保持技能列表整洁
-- 避免技能冲突
-
-### 7.4 技能命名
-
-- 使用清晰、描述性的技能名称
-- 避免与其他技能命名冲突
-- 遵循统一的命名规范
-
-## 8. 故障排查
-
-### 8.1 技能未生效
-
-- 检查技能目录结构是否正确
-- 确认 SKILL.md 文件格式正确
-- 重启 Trae IDE
-
-### 8.2 技能冲突
-
-- 检查项目技能和全局技能是否有同名冲突
-- 项目技能优先级通常高于全局技能
-- 调整技能名称避免冲突
-
-### 8.3 权限问题
-
-- 检查全局技能目录的读写权限
-- 确保 Trae IDE 有访问权限
-
-## 9. 总结
-
-全局技能是 Trae Skills 的强大功能，让你能够：
-
-- 建立个人专属的 AI 工具库
-- 在所有项目中复用常用技能
-- 提高开发效率，减少重复配置
-- 集中管理和维护技能
-
-通过合理使用全局技能和项目技能，你可以构建一个高效、灵活的 AI 辅助开发环境。
+- 全局只放 `skill-creator`
+- 项目按角色同步，不全量同步
+- 新增 skill 必须更新 `role-map.yml`
+- 修改 `skills/` 后重新运行对应角色的 `sync-skills.sh`
+- 提交前运行 `validate-skills.sh --role <目标角色>`

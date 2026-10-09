@@ -127,6 +127,7 @@ usage_prompts() {
   local skill="$1"
   case "$skill" in
     pp-tran) printf '%s\n' '- “用 pp-tran 同步翻译多语言，按简体中文为基准。”' '- “只翻译我刚加的这几个 key 到日文和韩文。”' '- “检查这些 arb 文件，把缺失语言补齐。”' ;;
+    pp-ads-check) printf '%s\n' '- “用 pp-ads-check 审查这个项目的 AdMob 接入是否合规。”' '- “上线前帮我检查插屏、激励和开屏广告的调用链。”' '- “AdMob 政策中心发警告了，帮我排查无效流量风险并给出整改清单。”' ;;
     skill-creator) printf '%s\n' '- “帮我创建一个用于代码评审的 skill。”' '- “优化这个 SKILL.md 的触发描述。”' '- “给这个 skill 设计几个测试用例。”' ;;
     ui-ux-pro-max) printf '%s\n' '- “帮我设计一个 SaaS dashboard 页面。”' '- “检查这个页面的 UI/UX 问题并给修改建议。”' '- “把这个移动端界面优化得更专业。”' ;;
     deploy-to-vercel) printf '%s\n' '- “把这个项目部署到 Vercel 预览环境。”' '- “部署并给我一个可访问链接。”' '- “检查 Vercel 部署失败的原因。”' ;;
@@ -212,6 +213,7 @@ when_text() {
     web-design-guidelines) echo "当你要审查 Web UI 是否符合设计、交互、可访问性和界面最佳实践时使用，适合 UI review、UX audit 和设计 QA。" ;;
     webapp-testing) echo "当你要用 Playwright 测试本地 Web 应用时使用，适合验证前端流程、截图、调试交互、查看浏览器日志和复现 UI bug。" ;;
     pp-tran) echo "当你要做 App / Web 项目的国际化翻译时使用。pp-tran 是 pp-translator 的简称，适合按中文或英文基准增量翻译 ARB、strings、JSON、YAML 等语言文件。" ;;
+    pp-ads-check) echo "当你要审查移动 App 的 Google AdMob 广告接入时使用，适合上线前做配置检查、广告调用链分析、UMP/ATT/COPPA 隐私合规审查、机型误触与无效流量风险排查，以及收到 AdMob/AdSense 政策警告后的自查。" ;;
     *) echo "$fallback" ;;
   esac
 }
@@ -222,6 +224,7 @@ prep_text() {
     deploy-to-vercel) echo "准备好项目目录、登录状态、部署目标，以及是否需要预览或生产环境。" ;;
     webapp-testing) echo "准备好本地启动方式、目标 URL、要验证的用户流程和预期结果。" ;;
     pp-tran) echo "准备好基准语言文件、目标语言范围，以及需要全量还是增量翻译。" ;;
+    pp-ads-check) echo "准备好项目根目录、接入的广告格式与目标市场（是否含 EEA/英国/瑞士、加州、儿童受众），以及 AdMob 后台广告位配置和政策中心状态。" ;;
     *) echo "准备好任务目标、输入材料、约束条件和你希望得到的输出形式。" ;;
   esac
 }
@@ -233,6 +236,7 @@ output_text() {
     pptx) echo "生成或修改后的演示文稿，以及关键页面说明。" ;;
     xlsx) echo "处理后的电子表格、图表、公式或清洗后的数据文件。" ;;
     pp-tran) echo "更新后的多语言文件、翻译差异和必要的本地化说明。" ;;
+    pp-ads-check) echo "P0/P1/P2 分级广告审查报告，包含代码证据（文件#行号）、政策依据链接、修复建议，以及需后台确认和运行时验证的清单。" ;;
     webapp-testing) echo "测试结论、复现步骤、截图或控制台/网络问题摘要。" ;;
     *) echo "符合该 skill 工作流的文档、代码、设计、检查报告或操作建议。" ;;
   esac
@@ -247,6 +251,7 @@ not_for_text() {
     xlsx) echo "不适合最终交付不是表格文件的任务。" ;;
     deploy-to-vercel) echo "不适合不需要部署或目标平台不是 Vercel 的任务。" ;;
     pp-tran) echo "不适合普通文案润色或非国际化文件的翻译任务。" ;;
+    pp-ads-check) echo "不适合 Meta、Unity Ads、AppLovin 等非 Google 广告网络自有政策的审查，也不替代在 AdMob 后台提交申诉本身。" ;;
     *) echo "不适合与该 skill 触发描述无关、目标不明确或缺少必要输入的任务。" ;;
   esac
 }

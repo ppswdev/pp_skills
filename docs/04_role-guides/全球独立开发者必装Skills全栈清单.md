@@ -206,14 +206,12 @@ uipro init --ai trae
 项目内已经包含：
 
 - `.trae-cn/skills/pp-tran`
-- `.trae/skills/skill-creator`
+- `.trae-cn/skills/skill-creator`
 
-如果你想把它们安装为 Trae 中国版全局技能，可参考：
+如果你想在当前项目启用独立开发者相关技能，可参考：
 
 ```bash
-mkdir -p ~/.trae-cn/skills
-cp -r .trae-cn/skills/pp-tran ~/.trae-cn/skills/
-cp -r .trae/skills/skill-creator ~/.trae-cn/skills/
+scripts/sync-skills.sh --role 独立开发者
 ```
 
 ---

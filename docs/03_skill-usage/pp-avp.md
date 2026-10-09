@@ -13,7 +13,7 @@
 
 ## 适合谁用
 
-- 未配置，请补充 docs/02_skill-catalog/role-map.yml
+- 程序开发者、独立开发者
 
 ## 什么时候用
 

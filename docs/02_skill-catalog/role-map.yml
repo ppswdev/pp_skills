@@ -43,6 +43,9 @@ requesting-code-review:
 skill-creator:
   domain: 00_base
   roles: [技能创建者, 程序开发者]
+humanizer-zh:
+  domain: 00_base
+  roles: [运营增长, 产品经理, 独立开发者]
 slack-gif-creator:
   domain: 00_base
   roles: [运营增长, 独立开发者]
@@ -118,3 +121,9 @@ webapp-testing:
 pp-tran:
   domain: 99_ppskills
   roles: [本地化, 程序开发者, 独立开发者, 运营增长]
+pp-avp:
+  domain: 99_ppskills
+  roles: [程序开发者, 独立开发者]
+pp-ads-check:
+  domain: 99_ppskills
+  roles: [程序开发者, 独立开发者]

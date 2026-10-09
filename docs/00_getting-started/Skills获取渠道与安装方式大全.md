@@ -123,7 +123,7 @@ npx skills remove [skill-name]
 
    ```bash
    # 项目级安装（仅当前项目）
-   cp -r ui-ux-pro-max .trae/skills/
+   cp -r ui-ux-pro-max .trae-cn/skills/
 
    # 全局安装（所有项目）
    cp -r ui-ux-pro-max ~/.trae-cn/skills/
@@ -193,15 +193,15 @@ npx skills remove [skill-name]
 git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
 
 # 2. 项目级安装（仅当前项目可用）
-mkdir -p .trae/skills
-cp -r ui-ux-pro-max-skill .trae/skills/
+mkdir -p .trae-cn/skills
+cp -r ui-ux-pro-max-skill .trae-cn/skills/
 
 # 3. 全局安装（所有项目可用，推荐）
 mkdir -p ~/.trae-cn/skills
 cp -r ui-ux-pro-max-skill ~/.trae-cn/skills/
 
 # 4. 验证安装
-ls -la .trae/skills/
+ls -la .trae-cn/skills/
 # 或
 ls -la ~/.trae-cn/skills/
 ```
@@ -285,14 +285,14 @@ npx openskills update [name...]
 
 | 技能类型         | 安装位置                  | 适用场景                                              |
 | ---------------- | ------------------------- | ----------------------------------------------------- |
-| **通用高频技能** | 全局 `~/.trae-cn/skills/` | 所有项目复用，如：skill-creator、代码格式化、文档生成 |
-| **项目专属技能** | 项目级 `.trae/skills/`    | 仅当前项目使用，如：部署脚本、团队规范、测试配置      |
+| **基础母技能** | 全局 `~/.trae-cn/skills/` | 默认只保留 `skill-creator` |
+| **角色技能** | 项目级 `.trae-cn/skills/` | 按角色同步，如程序开发者、本地化、产品设计 |
 
-**口诀**：通用高频装全局，专属业务放项目
+**口诀**：母技能放全局，角色技能放项目
 
 ### 7.2 技能管理建议
 
-1. **不要贪多**：全局技能只留 5-10 个高频使用的
+1. **不要贪多**：全局技能默认只留 `skill-creator`
 2. **定期清理**：每月清理一次长期不用的技能
 3. **建立本地资源库**：按场景分类归档你打磨好的技能包
 4. **备份原创技能**：一定要备份好自己原创的专属技能
@@ -334,7 +334,7 @@ My-Skills-Library/
 1. ✅ 检查目录结构是否正确：
 
    ```
-   .trae/skills/your-skill-name/SKILL.md
+   .trae-cn/skills/your-skill-name/SKILL.md
    ```
 
 2. ✅ 检查 `SKILL.md` 文件名是否正确（区分大小写）

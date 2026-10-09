@@ -9,8 +9,8 @@ Skills 是 Trae 中的功能模块，用于实现特定的任务自动化。每�
 ### 1.2 创建步骤
 
 1. **创建目录结构**
-   - 在项目根目录下创建 `.trae/skills/<skill-name>/` 目录
-   - 例如：`.trae/skills/pp-tran/`
+   - 在项目根目录下创建 `.trae-cn/skills/<skill-name>/` 目录
+   - 例如：`.trae-cn/skills/pp-tran/`
 
 2. **创建 SKILL.md 文件**
    - 在技能目录中创建 `SKILL.md` 文件
@@ -32,10 +32,10 @@ Skills 是 Trae 中的功能模块，用于实现特定的任务自动化。每�
 
 ```bash
 # 创建目录
-mkdir -p .trae/skills/pp-tran
+mkdir -p .trae-cn/skills/pp-tran
 
 # 创建 SKILL.md 文件
-cat > .trae/skills/pp-tran/SKILL.md << 'EOF'
+cat > .trae-cn/skills/pp-tran/SKILL.md << 'EOF'
 ---
 name: "pp-tran"
 description: "自动以简体中文为基准翻译国际化文本文件，支持增量翻译，处理l10n目录下的语言文件。当用户需要同步翻译其他语言文件时调用。"
@@ -239,7 +239,7 @@ EOF
 ### 6.1 创建问题
 
 **Q: 为什么我的 Skills 没有被识别？**
-A: 检查目录结构是否正确，确保 `.trae/skills/<skill-name>/SKILL.md` 文件存在且格式正确。
+A: 检查目录结构是否正确，确保 `.trae-cn/skills/<skill-name>/SKILL.md` 文件存在且格式正确。
 
 **Q: Skills 描述应该包含什么内容？**
 A: 描述应该包括技能的功能和使用场景，帮助模型决定何时使用该技能。

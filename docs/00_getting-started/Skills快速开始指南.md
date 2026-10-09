@@ -28,7 +28,7 @@
 **方式2：手动安装**
 ```bash
 git clone https://github.com/anthropics/skills.git
-cp -r skills/skills/skill-creator .trae/skills/
+cp -r skills/skills/skill-creator .trae-cn/skills/
 ```
 
 ### 2. 第二步：创建你的第一个自定义 Skill
@@ -89,7 +89,7 @@ uipro init --ai trae
 ### 问题1：技能未生效
 
 **解决方案**：
-1. ✅ 检查目录结构：`.trae/skills/skill-name/SKILL.md`
+1. ✅ 检查目录结构：`.trae-cn/skills/skill-name/SKILL.md`
 2. ✅ 完全重启 Trae IDE（关闭所有窗口再打开）
 3. ✅ 检查 `SKILL.md` 文件格式是否正确（YAML frontmatter）
 4. ✅ 确保文件夹名为 kebab-case 格式（小写+连字符）
@@ -119,8 +119,8 @@ uipro init --ai trae
 - 避免与其他技能重名
 
 ### 2. 技能管理
-- **全局技能**：只保留 5-10 个高频使用的
-- **项目技能**：按需安装，用完即清
+- **全局技能**：默认只保留 `skill-creator`
+- **项目技能**：按角色安装，例如 `scripts/sync-skills.sh --role 程序开发者`
 - **本地备份**：定期备份重要技能到本地
 - **版本控制**：将技能放在 Git 仓库中管理
 
@@ -134,7 +134,7 @@ uipro init --ai trae
 - 不要安装过多技能，避免性能损耗
 - 定期清理不用的技能，保持技能列表整洁
 - 优先使用轻量级技能，减少资源占用
-- 全局技能只装通用工具，项目技能装特定功能
+- 全局技能只装基础母技能，项目技能按角色装具体能力
 
 ---
 

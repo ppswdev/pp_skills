@@ -224,4 +224,4 @@ description: "当用户需要处理某类产品运营任务时使用，输出结
 1. 先按 P0 创建 3 到 6 个最常用 Skills，不要一次性铺满。
 2. 每个 Skill 至少积累 3 个真实业务样例，再沉淀稳定输出格式。
 3. 每季度根据运营流程复盘，淘汰低频 Skill，强化高频 Skill。
-4. 修改 `skills/` 后运行 `scripts/sync-skills.sh`，同步刷新各工具适配目录。
+4. 修改 `skills/` 后运行 `scripts/sync-skills.sh --role 运营增长`，按角色同步刷新各工具适配目录。

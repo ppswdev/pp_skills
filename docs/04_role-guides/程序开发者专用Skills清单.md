@@ -302,7 +302,7 @@ description: 什么时候触发这个 Skill，它解决什么开发问题，适�
 修改 `skills/` 后，按仓库规则运行：
 
 ```bash
-scripts/sync-skills.sh
+scripts/sync-skills.sh --role 程序开发者
 ```
 
 这会刷新 `.claude/skills/`、`.codex/skills/`、`.trae-cn/skills/` 三个技能入口。

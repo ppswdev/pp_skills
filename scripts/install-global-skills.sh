@@ -4,6 +4,7 @@ set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LOCAL_SKILLS_DIR="$PROJECT_ROOT/skills"
+BASELINE_SKILLS=("skill-creator")
 
 TARGETS=(
   "$HOME/.claude/skills"
@@ -11,62 +12,56 @@ TARGETS=(
   "$HOME/.trae-cn/skills"
 )
 
-echo "======================================"
-echo "多工具全局技能安装脚本"
-echo "======================================"
-echo ""
+fail() {
+  echo "错误：$1" >&2
+  exit 1
+}
 
-if [ ! -d "$LOCAL_SKILLS_DIR" ]; then
-    echo "错误：本地技能目录不存在: $LOCAL_SKILLS_DIR"
-    exit 1
-fi
-
-if [ ! "$(ls -A $LOCAL_SKILLS_DIR)" ]; then
-    echo "警告：本地技能目录为空: $LOCAL_SKILLS_DIR"
-    exit 0
-fi
-
-collect_leaf_skills() {
-    find "$LOCAL_SKILLS_DIR" -type f -name "SKILL.md" | while read -r skill_file; do
-        dirname "$skill_file"
-    done | sort
+find_skill_dir() {
+  local skill_name="$1"
+  find "$LOCAL_SKILLS_DIR" -type f -name "SKILL.md" | while read -r skill_file; do
+    skill_dir="$(dirname "$skill_file")"
+    if [ "$(basename "$skill_dir")" = "$skill_name" ]; then
+      echo "$skill_dir"
+      return
+    fi
+  done
 }
 
 install_to_target() {
-    local target_dir="$1"
-    local skill_dir
-    local skill_name
+  local target_dir="$1"
+  local skill_name
+  local skill_dir
 
-    mkdir -p "$target_dir"
-    find "$target_dir" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+  mkdir -p "$target_dir"
+  find "$target_dir" -mindepth 1 -maxdepth 1 ! -name ".system" -exec rm -rf {} +
 
-    echo "目标目录: $target_dir"
-    while read -r skill_dir; do
-        [ -z "$skill_dir" ] && continue
-        skill_name=$(basename "$skill_dir")
-        echo "  正在安装技能: $skill_name"
-        cp -R "$skill_dir" "$target_dir/$skill_name"
-        echo "    ✓ 已安装"
-    done < <(collect_leaf_skills)
-    echo ""
+  echo "目标目录: $target_dir"
+  for skill_name in "${BASELINE_SKILLS[@]}"; do
+    skill_dir="$(find_skill_dir "$skill_name")"
+    [ -n "$skill_dir" ] || fail "找不到全局基础技能：$skill_name"
+    echo "  正在安装基础技能: $skill_name"
+    cp -R "$skill_dir" "$target_dir/$skill_name"
+    echo "    ✓ 已安装"
+  done
+  echo ""
 }
 
-echo "正在从统一源目录复制技能到全局目录..."
+[ -d "$LOCAL_SKILLS_DIR" ] || fail "本地技能目录不存在: $LOCAL_SKILLS_DIR"
+
+echo "======================================"
+echo "全局基础 Skills 安装脚本"
+echo "======================================"
+echo ""
 echo "源目录: $LOCAL_SKILLS_DIR"
+echo "全局仅安装: ${BASELINE_SKILLS[*]}"
 echo ""
 
 for target_dir in "${TARGETS[@]}"; do
-    install_to_target "$target_dir"
+  install_to_target "$target_dir"
 done
 
-echo ""
 echo "======================================"
-echo "安装完成！"
+echo "安装完成"
 echo "======================================"
-echo ""
-echo "已同步到以下全局目录:"
-for target_dir in "${TARGETS[@]}"; do
-    echo "- $target_dir"
-done
-echo ""
-echo "请重启对应工具，以使全局技能生效。"
+echo "全局目录只保留基础技能。具体项目请使用 scripts/sync-skills.sh --role <角色名> 启用项目级 skills。"
