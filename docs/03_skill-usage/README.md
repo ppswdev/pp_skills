@@ -35,6 +35,7 @@
 | [algorithmic-art](algorithmic-art.md) | `05_design` | 产品设计、独立开发者 | [查看](algorithmic-art.md) |
 | [brand-guidelines](brand-guidelines.md) | `05_design` | 产品设计、运营增长 | [查看](brand-guidelines.md) |
 | [canvas-design](canvas-design.md) | `05_design` | 产品设计、独立开发者 | [查看](canvas-design.md) |
+| [design-taste-frontend](design-taste-frontend.md) | `05_design` | 产品设计、程序开发者、独立开发者 | [查看](design-taste-frontend.md) |
 | [theme-factory](theme-factory.md) | `05_design` | 产品设计、运营增长 | [查看](theme-factory.md) |
 | [ui-ux-pro-max](ui-ux-pro-max.md) | `05_design` | 产品设计、程序开发者、独立开发者 | [查看](ui-ux-pro-max.md) |
 | [composition-patterns](composition-patterns.md) | `06_engineering` | 程序开发者 | [查看](composition-patterns.md) |
@@ -45,6 +46,7 @@
 | [react-view-transitions](react-view-transitions.md) | `06_engineering` | 程序开发者、产品设计 | [查看](react-view-transitions.md) |
 | [web-design-guidelines](web-design-guidelines.md) | `06_engineering` | 程序开发者、产品设计 | [查看](web-design-guidelines.md) |
 | [webapp-testing](webapp-testing.md) | `06_engineering` | 程序开发者 | [查看](webapp-testing.md) |
+| [app-release-review](app-release-review.md) | `99_ppskills` | 程序开发者、独立开发者 | [查看](app-release-review.md) |
 | [pp-ads-check](pp-ads-check.md) | `99_ppskills` | 程序开发者、独立开发者 | [查看](pp-ads-check.md) |
 | [pp-avp](pp-avp.md) | `99_ppskills` | 程序开发者、独立开发者 | [查看](pp-avp.md) |
 | [pp-tran](pp-tran.md) | `99_ppskills` | 本地化、程序开发者、独立开发者、运营增长 | [查看](pp-tran.md) |

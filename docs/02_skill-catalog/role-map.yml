@@ -88,6 +88,9 @@ brand-guidelines:
 canvas-design:
   domain: 05_design
   roles: [产品设计, 独立开发者]
+design-taste-frontend:
+  domain: 05_design
+  roles: [产品设计, 程序开发者, 独立开发者]
 theme-factory:
   domain: 05_design
   roles: [产品设计, 运营增长]
@@ -118,6 +121,9 @@ web-design-guidelines:
 webapp-testing:
   domain: 06_engineering
   roles: [程序开发者]
+app-release-review:
+  domain: 99_ppskills
+  roles: [程序开发者, 独立开发者]
 pp-tran:
   domain: 99_ppskills
   roles: [本地化, 程序开发者, 独立开发者, 运营增长]
